@@ -13,22 +13,29 @@ import platform
 # Configuración de estilos y colores personalizados (CSS)
 st.markdown("""
     <style>
-    /* Cambiar color de fondo del bloque de respuesta */
+    /* Cambiar color de fondo y FORZAR color de texto oscuro */
     .st-response-box {
-        background-color: #f0f4f8;
+        background-color: #1e293b; /* Fondo azul oscuro moderno (apto para modo oscuro y claro) */
+        color: #f8fafc;            /* Texto claro legible */
         padding: 18px;
         border-radius: 10px;
-        border-left: 5px solid #2b5c8f;
+        border-left: 5px solid #38bdf8;
         margin-top: 10px;
+        font-size: 1.05em;
+        line-height: 1.6;
     }
-    /* Estilo para las fuentes extraídas */
+    /* Estilo para el contenedor de fuentes */
     .st-source-box {
-        background-color: #e8ecef;
+        background-color: #0f172a;
+        color: #94a3b8;
         padding: 10px 14px;
         border-radius: 6px;
         font-size: 0.9em;
-        color: #333;
+        border: 1px solid #334155;
         margin-top: 8px;
+    }
+    .st-source-box b {
+        color: #e2e8f0;
     }
     </style>
 """, unsafe_allow_html=True)
