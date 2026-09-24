@@ -9,14 +9,16 @@ from langchain.llms import OpenAI
 from langchain.chains.question_answering import load_qa_chain
 from langchain.schema import Document
 import platform
+from gtts import gTTS
+import io
 
 # Configuración de estilos y colores personalizados (CSS)
 st.markdown("""
     <style>
     /* Cambiar color de fondo y FORZAR color de texto oscuro */
     .st-response-box {
-        background-color: #1e293b; /* Fondo azul oscuro moderno (apto para modo oscuro y claro) */
-        color: #f8fafc;            /* Texto claro legible */
+        background-color: #1e293b;
+        color: #f8fafc;
         padding: 18px;
         border-radius: 10px;
         border-left: 5px solid #38bdf8;
@@ -46,7 +48,7 @@ st.caption(f"Motor ejecutado en Python v{platform.python_version()}")
 
 # Cargar y mostrar imagen personalizada
 try:
-    image = Image.open('ia.jpg') 
+    image = Image.open('ia.jpg')
     st.image(image, width=320, caption="Consultas documentales interactivas")
 except Exception as e:
     st.warning(f"No se pudo cargar la imagen: {e}")
@@ -108,6 +110,15 @@ if pdf is not None and ke:
             # Despliegue de la respuesta
             st.markdown("### 📝 Respuesta:")
             st.markdown(f'<div class="st-response-box">{response}</div>', unsafe_allow_html=True)
+
+            # --- GENERACIÓN DE AUDIO ---
+            try:
+                tts = gTTS(text=response, lang='es')
+                audio_bytes = io.BytesIO()
+                tts.write_to_fp(audio_bytes)
+                st.audio(audio_bytes.getvalue(), format="audio/mp3")
+            except Exception as audio_err:
+                st.error(f"No se pudo generar el audio: {audio_err}")
 
             # Identificación y despliegue de las páginas de origen
             pages = sorted(list(set(doc.metadata.get("page") for doc in docs if "page" in doc.metadata)))
