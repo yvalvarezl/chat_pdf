@@ -41,12 +41,12 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Título y presentación personalizados
-st.title('📚 Asistente Inteligente de Lectura (RAG)')
+st.title('📚 Asistente Inteligente de Lectura para Yos (RAG)')
 st.caption(f"Motor ejecutado en Python v{platform.python_version()}")
 
 # Cargar y mostrar imagen personalizada
 try:
-    image = Image.open('Chat_pdf.png')  # Reemplazar por la ruta de tu nueva imagen
+    image = Image.open('ia.jpg') 
     st.image(image, width=320, caption="Consultas documentales interactivas")
 except Exception as e:
     st.warning(f"No se pudo cargar la imagen: {e}")
